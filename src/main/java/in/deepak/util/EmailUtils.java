@@ -2,6 +2,8 @@ package in.deepak.util;
 
 import javax.mail.internet.MimeMessage;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -9,6 +11,8 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class EmailUtils {
+	
+	private static Logger logger = LoggerFactory.getLogger(EmailUtils.class);
 
 	@Autowired
 	private JavaMailSender mailSender;
@@ -27,7 +31,7 @@ public class EmailUtils {
 			isSent = true;
 		}
 		catch(Exception e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(), e);
 		}
 
 		return isSent;
